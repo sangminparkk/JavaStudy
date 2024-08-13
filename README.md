@@ -15,4 +15,5 @@
 
 * 자바의 정석
   * [ch2-variable]()
+  * [ch6-OOP](https://github.com/sangminparkk/JavaStudy/tree/ch6)
 
