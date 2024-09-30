@@ -7,15 +7,14 @@
 * Java 17
 
 ## 목차
-업데이트 중 :
+(업데이트 중)
+* 자바의 정석 -- 10/3
+* Java 8 -- 10/5
+* reflection 
+* effective java
 
-* [오버로딩, 오버라이딩 차이]()
-
-### books
-
-* 자바의 정석
+## 자바의 정석
   * [ch2-variable]()
   * [ch6-OOP](https://github.com/sangminparkk/JavaStudy/tree/ch6)
     * 객체지향 개념I : 클래스와 객체 / 변수와 메서드 / 메서드 오버로딩 / 생성자 / 변수의 초기화
   * [ch14-lambda&stream]()
-
