@@ -35,6 +35,8 @@ reference : [더 자바, Java8](https://www.inflearn.com/course/the-java-java8?s
 같은 맥락으로 Java8부터 static 메서드 역시 인터페이스에 직접 구현할 수 있습니다.
 
 ### Functional Interface
+목적 : 자바는 객체 지향 설계 목적으로 개발된 언어인만큼 함수에 대한 개념이 없었습니다. 자바 8부터 함수형 프로그래밍 개념이 도입되면서 `함수에 대한 참조`를 지원하기 위해 사용되기 시작했습니다. `Lazy Execution`과 같은 특정 작업 완료 이후에 실행될 함수를 정의하고 필요할 때 호출할 수 있습니다.
+
 * [함수형 인터페이스](https://docs.oracle.com/javase/8/docs/api/java/lang/FunctionalInterface.html)
   * 일반적으로 추상(abstract) 메서드가 하나만 선언된 인터페이스 (=SAM Interface, Single Abstract Method)
   * `@FunctionalInterface` 애노테이션을 가집니다.
@@ -65,3 +67,16 @@ public class Reader {
 //TODO : 멀티쓰레드(외부 변수 참조시 final) / 익명 내부 클래스
 
 ### 자바가 기본으로 제공하는 함수형 인터페이스
+[API 레퍼런스](https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html)  
+무슨 인터페이스를 어떻게 활용하는지가 메인입니다. 상세 코드는 **MyFunctionalInterface 클래스** 참조 바랍니다.
+
+| No. | Interface        | Description                                           |
+|-----|------------------|-------------------------------------------------------|
+| 1   | Function<T,R>    | T타입의 입력값 **하나**를 받아서 R타입을 반환                          |
+| 2   | BiFunction<T,U,R> | T와 U타입의 입력값 **두개**를 받아서 R타입을 반환                       |
+| 3   | Consumer<T>      | T타입을 입력받지만 아무 것도 반환하지 않음                              |
+| 4   | Supplier<T>      | 입력없이 T타입의 값을 반환                                       |
+| 5   | Predicate<T>     | T타입 조건(값)을 입력받아 boolean을 반환                           |
+| 6   | UnaryOperator<T> | Function의 특수케이스로, T타입의 입력값 하나를 받아서 동일한 타입(T)의 값을 반환   |
+| 7   | BinaryOperator<T> | BiFunction의 특수케이스로, T타입의 입력값 두개를 받아서 동일한 타입(T)의 값을 반환 |
+
