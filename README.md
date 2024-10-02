@@ -80,3 +80,70 @@ public class Reader {
 | 6   | UnaryOperator<T> | Function의 특수케이스로, T타입의 입력값 하나를 받아서 동일한 타입(T)의 값을 반환   |
 | 7   | BinaryOperator<T> | BiFunction의 특수케이스로, T타입의 입력값 두개를 받아서 동일한 타입(T)의 값을 반환 |
 
+### 람다 표현식 - 변수캡처
+(인자 리스트) -> {바디}로 표현합니다. 이때 바디부 에서 인자리스트 외 외부 변수를 참조(`변수캡처`)하여 처리하는 경우도 있습니다. 익명내부 클래스와 람다표현식에서 scope 개념도 정리할겸 살펴보겠습니다.  
+자바는 **인스턴스 변수나 메서드 파라미터를 사용**하는 것이 일반적이고, 외부 변수를 참조하는 경우가 드뭅니다. 그럼에도 외부 변수를 참조할때 제약사항이 존재합니다. 고민해보는 시간을 갖길 바랍니다.
+
+* 공통점 : 외부변수 참조 가능하지만, 해당 변수는 final이거나 effectively final 상태입니다. (thread-safe)
+```java
+public class MyLambda {
+  public static void main(String[] args) {
+
+    MyLambda myLambda = new MyLambda();
+    myLambda.executeTask(); 
+    myLambda.printNumber();
+
+  }
+
+  private void executeTask() {
+    int count = 10;
+
+    Thread thread = new Thread(new Runnable() { // 익명 클래스
+      @Override
+      public void run() {
+//        count++;  // 컴파일 에러
+        System.out.println(count);
+      }
+    });
+    thread.start();
+  }
+
+  private void printNumber() {
+    int count = 5;
+
+    Consumer<Integer> print = i -> { // 람다표현식
+      // count++; // 컴파일 에러
+      System.out.println(i + count); 
+    };
+  }
+}
+```
+
+* 차이점 : 익명클래스는 shadowing이 가능하지만, 람다표현식은 shadowing 적용이 안됩니다.
+  * `shadowing` : 외부 변수와 동일한 이름의 변수가 내부 범위에서 선언되었을때, 외부 변수를 가리는 현상을 의미합니다.
+  * 람다표현식은 선언된 위치에서 변수를 캡처하고, 해당 변수를 고정시킵니다. 따라서 변수명이 중복되지 않도록 주의해야 합니다.
+```java
+    private void executeTask() { // 익명 클래스
+        int count = 10;
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int count = 5; 
+                System.out.println(count); // 10(X) -> 5(O)
+            }
+        });
+        thread.start();
+    }
+
+    private void printNumber() { // 람다표현식
+        int count = 10;
+
+        Consumer<Integer> print = i -> { // i 대신에 매개변수명을 count 로 해도 컴파일 에러가 발생합니다.
+            int count = 10; // 컴파일 에러 발생 > Variable 'count' is already defined in the scope
+            System.out.println(i + count);
+        };
+    }
+```
+
+
