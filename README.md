@@ -145,5 +145,77 @@ public class MyLambda {
         };
     }
 ```
+### 메소드 레퍼런스 
+람다의 역할이 제한적이라면(=기존의 메소드를 호출하는 경우), 메소드 레퍼런스를 이용해서 코드의 가독성을 높일 수 있습니다. / [java 공식문서](https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html) / [예시코드](https://www.baeldung.com/java-method-references)
 
+| No. | Kind of Method Reference                                    | 
+|-----|-------------------------------------------------------------|
+| 1   | Static method                                               |
+| 2   | Instance methods of particular objects                      |
+| 3   | Instance methods of an arbitrary object of a particular type |
+| 4   | Constructor                                                 |
 
+* Static Method : `객체타입::스태틱 메소드`
+  * 문자열을 입력받아 문자열을 출력하는 함수형 인터페이스를 개발한다고 가정하면, 람다표현식 처리할 수 있지만 아래와 같이 객체를 생성하여 스태틱 메소드를 호출하는 방식으로 처리 가능합니다.
+```java
+public class MyMethodReference {
+
+    private String message;
+
+    public static String send(String message) {
+        return "Today : " + message;
+    }
+
+    public static void main(String[] args) {
+//        UnaryOperator<String> sendMessage = msg -> "Today : " + msg;
+        UnaryOperator<String> sendMessage = MyMethodReference::send; // ClassType::Static Method
+        System.out.println(sendMessage.apply("we're gonna keep going fast"));
+    }
+}
+```
+* Instance methods of particular objects : `객체 레퍼런스::인스턴스 메소드`
+  * 이름을 입력받아 이름을 출력하는 코드를 개발한다고 가정하면, 인스턴스 메소드에 접근해야함으로 인스턴스를 먼저 생성하고 
+```java
+MyMethodReference myMethodReference = new MyMethodReference();
+UnaryOperator<String> printName = myMethodReference::name;
+```
+
+* Instance methods of an arbitrary object of a particular type : `객체타입::인스턴스 메소드`
+```java
+List<Integer> numbers = Arrays.asList(41, 21, 31, 5, 4, 24);
+//numbers.stream().sorted((a, b) -> a.compareTo(b));
+numbers.stream().sorted(Integer::compareTo);
+```
+
+* Constructor : `객체타입::new`
+  * 기본생성자와 파라미터생성자 모두 똑같이 new 키워드를 통해 생성되지만, 서로 다른 값을 참조하고 있습니다. 
+  * Functional Interface에 대해 학습을 하셨으면 차이점이 보이실 겁니다. 
+```java
+public class MyMethodReference {
+
+  private String name;
+
+  public MyMethodReference() {
+  }
+
+  public MyMethodReference(String name) {
+    this.name = name;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public static void main(String[] args) {
+    // 기본생성자
+    Supplier<MyMethodReference> constructor = MyMethodReference::new;
+    MyMethodReference reference1 = constructor.get();
+    System.out.println(reference1.getName()); // null
+    
+    // 파라미터 생성자
+    Function<String, MyMethodReference> parameterConstructor = MyMethodReference::new;
+    MyMethodReference reference2 = parameterConstructor.apply("chandler");
+    System.out.println(reference2.getName()); // chandler
+  }
+}
+```
