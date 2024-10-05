@@ -259,3 +259,41 @@ public Card(String kind, int number) {
   * Primitive Type : 각 타입의 기본값 초기화
     * ex) int : 0 / long : OL / boolean : false
 * 지역변수 : 초기화 반드시 필요하며, 초기화 생략시 컴파일 에러가 발생합니다.
+
+### 3-1. 멤버변수 초기화
+* 명시적 초기화 : 필드값 선언과 동시에 값을 할당하는 방법
+* 생성자 : 인스턴스를 생성시, 파라미터를 할당받아 초기화하는 방법(자주 사용)
+* 초기화 블럭
+  * 클래스 블럭 : 클래스가 로딩될때 생성되며, 클래스 변수의 복잡한 초기화에 사용됩니다.
+  * 인스턴스 블럭 : 여러 생성자에서 공통적으로 필요한 초기화 코드를 한곳에 모아둘 수 있어 코드 중복을 줄여줍니다. 생성자보다 먼저 실행됩니다.
+
+```java
+public class Initialize {
+    static int[] arr = new int[10];
+
+    // static block
+    static {  // 배열에 1~10 정수 할당
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = (int) (Math.random() * 10) + 1;
+        }
+    }
+
+    // instance block
+    {
+        System.out.println("인스턴스 블럭 호출");
+    }
+    
+    public Initialize() {
+        System.out.println("생성자 호출");
+    }
+
+    public static void main(String[] args) {
+        new Initialize();
+    }
+    
+    // 출력
+    // 인스턴스 블럭 호출
+    // 생성자 호출
+}
+```
+
