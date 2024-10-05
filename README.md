@@ -17,6 +17,8 @@
   * [ch2-variable]()
   * [ch6-OOP](https://github.com/sangminparkk/JavaStudy/tree/ch6)
     * 객체지향 개념I : 클래스와 객체 / 변수와 메서드 / 메서드 오버로딩 / 생성자 / 변수의 초기화
+  * [ch7](https://github.com/sangminparkk/JavaStudy/tree/ch7)
+    * 객체지향 개념II : 
   * [ch14-lambda&stream]()
 
 
