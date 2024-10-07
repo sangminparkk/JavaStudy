@@ -223,3 +223,11 @@ public class MyMethodReference {
 ```
 
 ### 인터페이스 기본 메소드와 스태틱 메소드
+* Default method 를 사용하는 이유는 [공식문서](https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html)에 의하면, 인터페이스의 파워풀한 확장이 가능하기 때문입니다.
+  * 기존 메서드 선언이 아닌, 구현체를 함께 제공하는 방법
+  * 기존에 구현된 클래스들에게 영향을 미치지 않으면서도 새로운 기능을 추가할 수 있는 방법
+  * 인터페이스 구현체가 재정의할 수 있다.
+  * 인터페이스를 상속받은 인터페이스에서 abstract로 변경하여 다시 선언할 수 있다.
+
+* static method
+  * 해당 타입과 관련됐으며, 객체 상태와 무관하게 동작하는 기능의 경우 static 메서드로 정의하여 유틸리티 혹은 헬퍼 메서드를 제공할 수 있다. 
