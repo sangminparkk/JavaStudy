@@ -221,3 +221,5 @@ public class MyMethodReference {
   }
 }
 ```
+
+### 인터페이스 기본 메소드와 스태틱 메소드
