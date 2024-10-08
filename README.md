@@ -231,3 +231,11 @@ public class MyMethodReference {
 
 * static method
   * 해당 타입과 관련됐으며, 객체 상태와 무관하게 동작하는 기능의 경우 static 메서드로 정의하여 유틸리티 혹은 헬퍼 메서드를 제공할 수 있다. 
+
+### 자바8 API로 살펴보는 기본 메소드와 스태틱 메소드
+자바8에서 추가된 default method 예시를 살펴보겠습니다. 대표적으로 Iterable, Collection, Comparator 가 있습니다.
+* Iterable
+  * 자바에서 Collection(List or Set)은 Iterable 인터페이스를 상속 받기 때문에 Collection은 Iterable의 default 메소드를 사용할 수 있습니다.
+    * forEach() : elements 를 순회하면서 동작을 수행합니다. 이때, Consumer 라는 함수형 인터페이스를 매개변수로 받으므로 메소드 레퍼런스를 사용할 수 있습니다.  
+    * spliterator() : 
+
