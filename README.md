@@ -237,5 +237,14 @@ public class MyMethodReference {
 * Iterable
   * 자바에서 Collection(List or Set)은 Iterable 인터페이스를 상속 받기 때문에 Collection은 Iterable의 default 메소드를 사용할 수 있습니다.
     * forEach() : elements 를 순회하면서 동작을 수행합니다. 이때, Consumer 라는 함수형 인터페이스를 매개변수로 받으므로 메소드 레퍼런스를 사용할 수 있습니다.  
-    * spliterator() : 
+    * spliterator() : Stream API 핵심 구현 로직으로, 대규모 데이터를 탐색하거나 병렬 처리를 수행하는 데 유용합니다. [예시코드](https://www.baeldung.com/java-spliterator)
+      * spliterator 객체를 생성하고, tryAdvance()와 while문을 함께 사용하여 존재하는 요소마다 순차적으로 처리하는 코드입니다. 
+```java
+List<Article> articles = Stream.generate(() -> new Article("Java"))
+        .limit(35000)
+        .collect(Collectors.toList());
+
+Spliterator<Article> spliterator = articles.spliterator();
+while (spliterator.tryAdvance(article -> article.setName(article.getName().concat("- published by xxx"))));
+```
 
