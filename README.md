@@ -248,3 +248,5 @@ Spliterator<Article> spliterator = articles.spliterator();
 while (spliterator.tryAdvance(article -> article.setName(article.getName().concat("- published by xxx"))));
 ```
 
+//TODO : spliterator 모든 메소드 공부하기
+[reference](https://www.baeldung.com/java-spliterator)
