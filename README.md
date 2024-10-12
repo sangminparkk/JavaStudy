@@ -28,13 +28,24 @@ public class Point {
 * 상속 : is a
 * 포함 : has a
 
+//TODO : Deck 섞는 예제 이해되지 않음. 코드가 어렵진 않은데 현재 내수준에서 이해하기 힘든 것 같음.
 
 
-
-
-
-
-
+### 1-3. 단일 상속
+자바는 기본적으로 단일 상속만 허용합니다. 우선 순위가 높은 클래스를 상속관계로 맵핑해주고, 나머지는 포함관계로 처리합니다.
+* 모든 클래스의 조상 클래스는 `Object` 입니다. 조상이 없는 클래스는 자동으로 Object 클래스를 상속 받습니다.
+```java
+// AS-IS
+public class TVCR extends TV, VCR { // 허용 불가
+}
+// TO-BE
+public class TVCR extends TV { // 단일 상속
+  VCR vcr = new VCR();
+}
+// Extends Object
+public class TV extends Obeject {
+}
+```
 ### 2. 오버라이딩
 
 ### 3. package 와 import
