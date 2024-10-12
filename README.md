@@ -18,7 +18,7 @@
   * [ch6-OOP](https://github.com/sangminparkk/JavaStudy/tree/ch6)
     * 객체지향 개념I : 클래스와 객체 / 변수와 메서드 / 메서드 오버로딩 / 생성자 / 변수의 초기화
   * [ch7](https://github.com/sangminparkk/JavaStudy/tree/ch7)
-    * 객체지향 개념II : 
+    * 객체지향 개념II : 상속 / 오버라이딩 / 제어자 / 다형성 / 추상 클래스 / 인터페이스
   * [ch14-lambda&stream]()
 
 
