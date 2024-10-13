@@ -86,7 +86,55 @@ public class Point3D extends Point {
   * import문은 컴파일시에 처리됨으로 프로그램 성능에 아무런 영향을 미치지 못합니다. → **몰랐지만 디테일한 부분**
 
 ## 객체지향개념 II-2
-### 1. 제어자
+### 1. 제어자(modifiers)★
+클래스, 변수, 메서드의 선언부에 사용되면서 부가적인 의미를 담고 있습니다.  
+크게 두가지로 분류할 수 있습니다.
+* 접근제어자 : private < default < protected < public
+* 그외 제어자 : static, final, abstract, native, transient, synchronized, volatile, strictfp
+ 
+하나의 대상에 여러개의 제어자를 조합해서 사용할 수 있지만, **접근제어자는 단 하나만 사용 가능합**니다.
+
+### 1-1. static - 공통적인
+static 제어자는 `메서드, 멤버변수, 초기화 블럭`에 사용할 수 있습니다.
+* 멤버변수 : 클래스가 메모리에 로드될때 생성되어 모든 인스턴스에 공통적으로 사용되는 클래스변수입니다.
+* 메서드 : 인스턴스 생성없이, 클래스.메서드명 으로 호출 가능합니다. 이때, static메서드 내에서는 인스턴스 멤버변수들을 직접 사용할 수 없고 매개변수와 같은 지역변수를 사용할 수 있습니다.
+* 초기화 블럭 : static 변수의 복잡한 초기화 수행을 처리할 수 있습니다.
+
+### 1-2. final - 변경될 수 없는
+final 제어자는 `클래스, 메서드, 멤버변수, 지역변수`에 사용할 수 있습니다.
+* 클래스 : 변경되거나 더이상 확장될 수 없으므로, 다른 클래스의 조상클래스가 될 수 없습니다. 대표적인 final 클래스로는 `String`과 `Math`가 있습니다.
+* 메서드 : 오버라이딩을 통해 재정의할 수 없는 메서드
+* 멤버변수/지역변수 : 값을 변경할 수 없는 상수로서 취급
+
+### 1-3. 생성자를 이용한 final 멤버변수 초기화
+일반적으로 final이 붙은 변수는 상수로써 선언과 동시에 초기화를 하지만, 인스턴스마다 고정된 값을 갖는 인스턴스 변수의 경우 생성자를 통해서 초기화를 합니다.  
+인스턴스 생성하면서 초기화된 final변수(상수)는 변경이 불가능합니다.
+```java
+public class Card {
+  final int NUMBER;
+  final String KIND;
+  
+  public Card(int number, String kind) {
+    this.NUMBER = number;
+    this.KIND = kind;
+  }
+
+  public Card() {
+    this(1,"HEART");
+  }
+  public static void main(String[] args) {
+    Card card = new Card(5,"HEART");
+//        card.NUMBER = 20; //Cannot assign a value to final variable 'NUMBER'
+  }
+}
+```
+
+### 1-4. abstract
+
+### 1-5. 
+
+### 1-6. 접근제어자 
+
 ### 2. 다형성
 
 ## 객체지향개념 II-3
