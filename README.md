@@ -173,7 +173,47 @@ final class Singleton { // 상속 제한 + 접근제어자 생략되어 default 
 3. 메서드 : abstract 메서드의 접근제어자가 private 일 수 없습니다. abstract 는 상속을 통해 완성되어야 함으로, private을 사용할 경우 자손 클래스에서의 접근을 막기 때문입니다.
 4. 클래스 : abstract 와 final 을 동시에 사용할 수 없습니다. final은 상속을 제한함으로써 확장할 수 없지만, abstract는 상속을 통해서 완성되어야 하는 의미입니다. 서로 모순되기 때문입니다.
 
-### 2. 다형성
+### 2. 다형성(polymorphism)
+여러 가지 형태를 가질 수 있는 개념을 의미합니다. 하나의 참조변수로 **여러 타입의 객체를 참조**할 수 있습니다.  
+부모 타입의 참조변수로 자식 타입의 인스턴스를 다룰 수 있습니다.
+```java
+// parent - Tv, child - CaptionTv
+CaptionTv captionTv = new CaptionTv();
+Tv tv = new CaptionTv();
+```
+### 2-1. 형변환(casting)
+* Up-casting : 자식타입 → 부모타입을 참조하며, 형변환 생략이 가능합니다.
+* Down-casting : 부모타입 → 자식타입을 참조하며, 형변환 생략이 불가능합니다.
+
+### 2-2. instanceOf 연산자
+참조변수가 참조하는 인스턴스의 실제 타입을 체크하는데 사용됩니다. 결과값이 true면, 해당 타입으로 형변환이 가능합니다.
+````java
+CaptionTv captionTv = new CaptionTv();
+if (captionTv instanceof CaptionTv) { // true
+    System.out.println("CaptionTv의 인스턴스 입니다.");
+}
+if (captionTv instanceof Tv) { // true
+    System.out.println("Tv의 인스턴스 입니다.");
+}
+if (captionTv instanceof Object) { // true
+    System.out.println("Object의 인스턴스 입니다.");
+}
+````
+
+### 2-3. 참조변수와 인스턴스 변수의 연결 → 몰랐던 내용 
+부모클래스와 자식클래스간에, 멤버변수 혹은 메서드가 중복정의된 경우 아래 원칙에 따라 동작합니다.
+* 멤버변수 : 레퍼런스타입에 영향을 받습니다.
+* 메서드 : 레퍼런스타입에 영향을 받지 않습니다.
+```java
+Tv tv = new CaptionTv(); // parent
+CaptionTv captionTv = new CaptionTv(); // child
+
+System.out.println(tv.channel); // 30 - parent
+tv.channelUp(); // child
+System.out.println(captionTv.channel); // 50 - child
+captionTv.channelUp(); // child
+```
+
 
 ## 객체지향개념 II-3
 ### 1. 추상클래스
