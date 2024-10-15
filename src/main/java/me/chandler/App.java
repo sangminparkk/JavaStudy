@@ -1,6 +1,8 @@
 package me.chandler;
 
 import me.chandler.ch7.Time;
+import me.chandler.ch7._interface.A;
+import me.chandler.ch7._interface.B;
 
 /**
  * Hello world!
@@ -17,5 +19,11 @@ public class App
         time.setHour(time.getHour() + 1);
         System.out.println(time.getHour());
 
+        A a = new A();
+        a.methodA(new B());
+        a.methodC();
+
+        System.out.println("메인");
+        a.methodD();
     }
 }
