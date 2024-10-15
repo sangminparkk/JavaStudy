@@ -248,6 +248,24 @@ List<Article> articles = Stream.generate(() -> new Article("Java"))
 Spliterator<Article> spliterator = articles.spliterator();
 while (spliterator.tryAdvance(article -> article.setName(article.getName().concat("- published by xxx"))));
 ```
-
 //TODO : spliterator 모든 메소드 공부하기
 [reference](https://www.baeldung.com/java-spliterator)
+
+### Stream
+데이터 모음이 병렬로 처리되는 과정을 stream 이라고 합니다. `컨베이어 벨트`를 생각하면 이해하기 좋습니다. 
+* 데이터를 담고 있는 저장소(컬렉션)를 의미하는게 아니며
+* 기존 데이터 소스를 변경하지 않습니다.
+* 데이터 처리는 오직 한번만 합니다. 
+* 중개 오퍼레이션은 근본적으로 `lazy` 합니다.
+  * lazy : 실질적으로 데이터가 요구되는 시점에 맞춰서 연산이 수행됨. 그전까지는 연산 수행 X. 결국 종료 오퍼레이션이 없으면 동작 안한다는 얘기입니다.
+* 손쉽게 병렬 처리를 할 수 있습니다.
+* `stream pipeline` 
+  * 중개 오퍼레이션이 0~여러개 올 수 있고
+  * 종료(터미널) 오퍼레이션은 반드시 있어야 됩니다. => 그래야 연산이 수행되기 때문입니다.
+* `중개 오퍼레이션`
+  * stream 을 리턴합니다.
+  * 근본적으로 lazy 합니다.
+  * ex) map, filter, limit, sorted,...
+* `종료 오퍼레이션`
+  * stream이 아닌 다른 타입을 리턴하지 않습니다.
+  * ex) collect, count, forEach, min, max,...
