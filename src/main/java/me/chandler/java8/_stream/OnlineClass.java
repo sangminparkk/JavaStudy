@@ -1,5 +1,7 @@
 package me.chandler.java8._stream;
 
+import java.util.Optional;
+
 public class OnlineClass {
 
     private Integer id;
@@ -7,6 +9,8 @@ public class OnlineClass {
     private String title;
 
     private boolean closed;
+
+    private Progress progress; // reference type 의 기본값은 null > null에 메소드를 호출하려고 한다면 > NPE
 
     public OnlineClass(Integer id, String title, boolean closed) {
         this.id = id;
@@ -37,4 +41,10 @@ public class OnlineClass {
     public void setClosed(boolean closed) {
         this.closed = closed;
     }
+
+    public Optional<Progress> getProgress() {
+        return Optional.ofNullable(progress);
+    }
+
+
 }

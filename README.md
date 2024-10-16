@@ -269,3 +269,36 @@ while (spliterator.tryAdvance(article -> article.setName(article.getName().conca
 * `종료 오퍼레이션`
   * stream이 아닌 다른 타입을 리턴하지 않습니다.
   * ex) collect, count, forEach, min, max,...
+
+### Optional
+먼저 Optional API 를 사용하는 이유에 대해 알아보겠습니다.
+* `명시적인 의도` : Optional을 리턴하는 메소드는 호출자에게 **값이 없을 수도 있다**는 것을 명확하게 전달합니다. **메소드의 반환값으로 Optional 을 사용하는게 목적**입니다.
+* `코드 가독성` : 내장된 메서드를 사용해서 Null check 로직(if (value!=null)) 을 줄여서 값이 없을때 어떻게 처리해야하는지 한줄 표현이 가능합니다.
+  
+현실적으로 주로 null 을 리턴하거나 null 체크를 까먹은 경우가 많은데요. 이런 경우 **null로부터 안전한 코딩**을 하기 위해 Optional API를 주로 사용합니다.  
+
+메서드 작업 중 특별한 상황에서 값을 제대로 리턴할 수 없는 경우 선택할 수 있는 방법은 아래와 같습니다.
+1. 예외 리턴 : 예외가 발생하면 stack trace 가 만들어집니다. 자주 생성하고 처리하게 될수록 CPU와 메모리 등 비용이 발생하는 단점이 있습니다. 가급적으면 예외를 던지지 않는게 중요합니다.
+2. null 리턴 : 혼선을 초래할 가능성이 높습니다. 당연히 값이 있을 거라고 생각했지만 NPE가 발생한다면, 메서드를 호출하는 쪽 입장에서는 매번 주의해야 하는 번거로움이 있습니다.
+3. Optional 리턴(java8~) : 명시적으로 클라이언트에 빈값이 있다는 걸 알려줍니다.
+
+### Optional 사용시 주의사항
+기본적으로 **리턴 타입으로 사용하는 게 권장사항**이고, 그외는 권장하지 않습니다.
+
+* 매개변수 타입 : 비권장사항으로, null이 포함될 가능성이 있어 위험합니다. null로부터 안전하게 코딩하려고 API를 사용하는데 setter를 통해서 null을 넘겨줄 수 있습니다. NPE 발생합니다.
+```java
+public void setProgress(Optional<Progress> progress) {
+    this.progress = progress.get(); // NPE
+}
+```
+* Map의 Key 타입 : Key는 반드시 null 이 되면 안되는게 정의입니다. 
+* 인스턴스 필드 타입 : 필드값이 없다면 차라리 validation 처리하는게 좋습니다.
+* Collection, Map, Stream Array, Optional은 Opiontal로 감싸지 말 것.
+  * 그 자체로 이미 비어있는지를 확인할 수 있는 컨테이너 성격을 띄고 있기 때문입니다.
+* primitive 타입은 Optional.of(10) 사용하지 말것.
+  * boxing, unboxing 이 자동으로 일어나면서 추가적인 메모리 할당과 성능 비용 문제가 발생할 수 있습니다.
+  * primitive 값을 직접 저장하는 OptionalInt/OptionalDouble/OptionalLong 을 사용하는 것을 권장합니다.
+
+자주 사용되는 메서드는 아래와 같습니다.
+* `of` : null 이 아닌 데이터만 받고 싶은 경우
+* `ofNullable()` : null 일수도 있는 데이터를 감쌀때
