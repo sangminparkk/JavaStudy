@@ -1,21 +1,37 @@
 package me.chandler.ch8;
 
-public class _Throws_2 {
+import java.io.File;
+import java.io.IOException;
 
-    public static void main(String[] args) throws Exception {
-        method1();
+public class _Throws_3 {
+
+    public static void main(String[] args) {
+        File newFile = createFile(args[0]);
+        System.out.println(newFile.getName() + " 파일이 성공적으로 생성되었습니다.");
     }
 
-    private static void method1() throws Exception {
+    private static File createFile(String fileName) {
+
+        // 예외 먼저 처리 : try - catch - finally
         try {
-            throw new Exception("예외>>>>"); // 예외를 발생만 시킴. 곧바로 해당 메세지가 출력되지 않습니다.
+            if (fileName == null || fileName.equals("")) {
+                throw new Exception("파일이름이 유효하지 않습니다.");
+            }
         } catch (Exception e) {
-            System.out.println("method1메서드에서 예외가 처리되었습니다."); //1. 가장 먼저 출력
-            e.printStackTrace(); // 2. e.getMessage와 함께 정보를 출력합니다.
+            // 파일이름이 유효하지 않을때
+            fileName = "제목없음.txt";
+        } finally {
+            File file = new File(fileName);
+            createNewFile(file);
+            return file;
         }
     }
 
-    private static void method2() throws Exception {
-        throw new Exception("예외>>>>");
+    private static void createNewFile(File file) {
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
