@@ -73,3 +73,29 @@ public class _Throws_2 {
 
 ### 7. 예외 되던지기(re-throwing)
 예외처리한 후 다시 예외를 던짐으로써, 호출한 메서드로 전달하는 상황을 말합니다. 예외가 발생한 메서드와 호출한 메서드, 양쪽에서 예외처리를 해주면 됩니다.
+
+### 8. 사용자정의 예외 만들기
+Exception 클래스를 상속 받아 MyException 클래스를 생성했습니다.
+* 생성자를 통해 message와 code를 입력 받습니다.
+  * message : 부모 클래스인 Exception 생성자를 호출한 결과입니다.
+  * code : final 키워드임으로 초기화가 반드시 필요하여 매개변수로 입력받은 데이터를 할당해줍니다. 
+* message만 입력받는 경우, code는 100으로 초기화 합니다.
+```java
+public class MyException extends Exception{
+
+    private final int CODE;
+
+    public MyException(String message, int code) {
+        super(message);
+        this.CODE = code;
+    }
+
+    public MyException(String message) {
+        this(message, 100);
+    }
+
+    public int getCODE() {
+        return CODE;
+    }
+}
+```
