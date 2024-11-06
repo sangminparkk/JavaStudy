@@ -20,8 +20,10 @@
     * 객체지향 개념I : 클래스와 객체 / 변수와 메서드 / 메서드 오버로딩 / 생성자 / 변수의 초기화
   * [ch7](https://github.com/sangminparkk/JavaStudy/tree/ch7)
     * 객체지향 개념II : 상속 / 오버라이딩 / 제어자 / 다형성 / 추상 클래스 / 인터페이스
-  * [ch8]()
+  * [ch8](https://github.com/sangminparkk/JavaStudy/tree/ch8)
     * 예외처리
+  * [ch9](https://github.com/sangminparkk/JavaStudy/tree/ch9)
+    * java.lang package : Object, String, StringBuffer
   * [ch14-lambda&stream]()
 
 
